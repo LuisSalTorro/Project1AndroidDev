@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
@@ -15,6 +17,9 @@ import android.view.ViewGroup;
  */
 public class sell extends Fragment {
 
+    //database things
+    EditText carEdit, yearEdit, priceEdit;
+    Button sellButton;
 
     public sell() {
         // Required empty public constructor
@@ -25,7 +30,10 @@ public class sell extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_sell, container, false);
     }
+
+
 
 }
