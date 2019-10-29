@@ -29,7 +29,7 @@ public class DatabaseCars extends SQLiteOpenHelper {
             + NewCar.info.yearCol + " TEXT,"
             //+ NewCar.info.maxCol + " INTEGER PRIMARY KEY,"
             //+ NewCar.info.minCol + " INTEGER PRIMARY KEY,"
-            + NewCar.info.priceCol + " TEXT);";
+            + NewCar.info.priceCol + " INTEGER);"; 
 
     //Data base is created whenever constructer is called
     public DatabaseCars(Context context){

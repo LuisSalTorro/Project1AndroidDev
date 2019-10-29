@@ -24,25 +24,31 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar mToolbar;
     TabLayout mTabLayout;
-    TabItem sell;
-    TabItem buy;
-    TabItem display;
+    TabItem sell, buy, display;
     ViewPager mPager;
     PagerController mPagerController;
 
+<<<<<<< Updated upstream
     //database things
     DatabaseCars myDB; //initializes database class
     EditText carEdit, yearEdit, priceEdit;
     Button sellButton, searchButton;
+=======
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< Updated upstream
         //call constructer, creates the database
         myDB = new DatabaseCars(this);
         userInterface();
         mySQLiteDB();
+=======
+
+        userInterface();
+>>>>>>> Stashed changes
     }
 
     protected void userInterface(){
@@ -77,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         mPager.addOnPageChangeListener((ViewPager.OnPageChangeListener) new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));  //causing the application to crash
     }
 
+<<<<<<< Updated upstream
     protected void mySQLiteDB(){
         carEdit = (EditText) findViewById(R.id.carEdit);
         yearEdit = (EditText) findViewById(R.id.yearEdit);
@@ -135,4 +142,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage(Message);
         builder.show();
     }
+=======
+
+>>>>>>> Stashed changes
 }
