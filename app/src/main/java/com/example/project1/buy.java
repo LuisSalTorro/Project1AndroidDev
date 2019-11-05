@@ -1,32 +1,30 @@
 package com.example.project1;
 
 
-<<<<<<< Updated upstream
-=======
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
->>>>>>> Stashed changes
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class buy extends Fragment {
-<<<<<<< Updated upstream
-=======
     DatabaseCars myDB; //initializes database class
     EditText carEditBuy, minEdit, maxEdit;
     Button searchButton;
     int min = 0, max = Integer.MAX_VALUE; //if crashes occur, keep these empty
->>>>>>> Stashed changes
 
 
     public buy() {
@@ -37,9 +35,6 @@ public class buy extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< Updated upstream
-        return inflater.inflate(R.layout.fragment_buy, container, false);
-=======
         View rootView = inflater.inflate(R.layout.fragment_buy, container, false);
         mySQLiteDB(rootView);
         return rootView;
@@ -104,7 +99,6 @@ public class buy extends Fragment {
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
->>>>>>> Stashed changes
     }
 
 }
