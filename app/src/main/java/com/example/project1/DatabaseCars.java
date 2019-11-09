@@ -21,7 +21,7 @@ public class DatabaseCars extends SQLiteOpenHelper {
 //    public static final int minCol = 0;
 //    public static final int maxCol = 0;
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 4;
 
     String CREATE_QUERY = "CREATE TABLE " + NewCar.info.TABLE_NAME + "("
             + NewCar.info.idCol + " INTEGER PRIMARY KEY,"
@@ -59,8 +59,7 @@ public class DatabaseCars extends SQLiteOpenHelper {
         contentData.put(NewCar.info.modelCar,modelCar);
         contentData.put(NewCar.info.yearCol,yearCol);
         contentData.put(NewCar.info.priceCol,price);
-        //contentData.put(NewCar.info.minCol,min);
-        //contentData.put(NewCar.info.maxCol,max);
+
         long error = db.insert(NewCar.info.TABLE_NAME, null, contentData);
         if(error == -1){
             Log.e("DATABASE OPERATIONS","Table INSERT ERROR...");
@@ -75,5 +74,13 @@ public class DatabaseCars extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor show = db.rawQuery("select * from " +NewCar.info.TABLE_NAME, null);
         return show;
+    }
+
+    public Cursor displayCars(String modelc, int mini, int maxi){
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor filterData = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE MAKE = " + make + " AND PRICE BETWEEN " + min + " AND " + max, null);
+        Cursor filterData = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ModelCar = '" + modelc + "' AND PRICE BETWEEN " + mini + " AND " + maxi, null);
+        //Cursor filterData = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE PRICE BETWEEN " + min + " AND " + max, null);
+        return filterData;
     }
 }

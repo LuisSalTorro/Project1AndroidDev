@@ -64,6 +64,29 @@ public class buy extends Fragment {
         }
     }
 
+//    public void searchCars(){
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Cursor show = myDB.displayCars(carEditBuy.getText().toString(), min, max);
+//                if (show.getCount() == 0) {
+//                    //showMessage("Error", "Nothing found");
+////                            Toast.makeText(getActivity(), "Show Car Error / Empty", Toast.LENGTH_SHORT).show();
+//                    //carInfo.setText("There are no cars up for sale.");
+//                }
+//                StringBuffer buffer = new StringBuffer();
+//                while (show.moveToNext()) {
+//                    //buffer.append("Id : " + show.getString(0) + "\n");
+//                    buffer.append("Model : " + show.getString(1) + "\n");
+//                    buffer.append("Year : " + show.getString(2) + "\n");
+//                    buffer.append("Price : " + show.getString(3) + "\n");
+//                }
+//                //showMessage("Data", buffer.toString());
+//                //carInfo.setText(buffer.toString());
+//
+//            }
+//        });
+//    }
 
     public void searchCars() {
         searchButton.setOnClickListener(
@@ -91,7 +114,7 @@ public class buy extends Fragment {
                         intent.putExtras(bundle);
                         fragment.setArguments(bundle);
 
-
+//                        myDB.displayCars();
                     }//onClick
                 }
         );
