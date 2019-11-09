@@ -1,32 +1,34 @@
 package com.example.project1;
 
-
-<<<<<<< Updated upstream
-=======
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
->>>>>>> Stashed changes
+
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class buy extends Fragment {
-<<<<<<< Updated upstream
-=======
+
     DatabaseCars myDB; //initializes database class
     EditText carEditBuy, minEdit, maxEdit;
     Button searchButton;
     int min = 0, max = Integer.MAX_VALUE; //if crashes occur, keep these empty
->>>>>>> Stashed changes
+    SharedViewModel model;
 
 
     public buy() {
@@ -34,12 +36,16 @@ public class buy extends Fragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        model = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< Updated upstream
-        return inflater.inflate(R.layout.fragment_buy, container, false);
-=======
+
         View rootView = inflater.inflate(R.layout.fragment_buy, container, false);
         mySQLiteDB(rootView);
         return rootView;
@@ -52,72 +58,37 @@ public class buy extends Fragment {
         maxEdit = rootView.findViewById(R.id.maxEdit);
         searchButton = rootView.findViewById(R.id.searchButton);
 
-        searchCars();
+        //searchCars();
+        searchCar();
     }
 
-    public void convertStringToInt(String min, String max){
-        try{
-            this.min = Integer.parseInt(min);
-            this.max = Integer.parseInt(max);
-        }catch(Exception e){
-            Toast.makeText(getActivity(),"Type numbers", Toast.LENGTH_LONG).show();
-        }
-    }
+    public void searchCar(){
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    String input = carEditBuy.getText().toString();
+                    model.setModel(input);
 
-//    public void searchCars(){
-//        searchButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Cursor show = myDB.displayCars(carEditBuy.getText().toString(), min, max);
-//                if (show.getCount() == 0) {
-//                    //showMessage("Error", "Nothing found");
-////                            Toast.makeText(getActivity(), "Show Car Error / Empty", Toast.LENGTH_SHORT).show();
-//                    //carInfo.setText("There are no cars up for sale.");
-//                }
-//                StringBuffer buffer = new StringBuffer();
-//                while (show.moveToNext()) {
-//                    //buffer.append("Id : " + show.getString(0) + "\n");
-//                    buffer.append("Model : " + show.getString(1) + "\n");
-//                    buffer.append("Year : " + show.getString(2) + "\n");
-//                    buffer.append("Price : " + show.getString(3) + "\n");
-//                }
-//                //showMessage("Data", buffer.toString());
-//                //carInfo.setText(buffer.toString());
-//
-//            }
-//        });
-//    }
+                    String minSTR = minEdit.getText().toString();
+                    int minInt = Integer.valueOf(minSTR);
+                    model.setMin(minInt);
 
-    public void searchCars() {
-        searchButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Cursor show = myDB.showCar();
-                        if (show.getCount() == 0) {
-                            showMessage("Error", "Nothing found");
-                            Toast.makeText(getActivity(), "Show Car Error / Empty", Toast.LENGTH_SHORT).show();
-                        }
-                        StringBuffer buffer = new StringBuffer();
-                        while (show.moveToNext()) {
-                            //buffer.append("Id : " + show.getString(0) + "\n");
-                            buffer.append("Model : " + show.getString(1) + "\n");
-                            buffer.append("Year : " + show.getString(2) + "\n");
-                            buffer.append("Price : " + show.getString(3) + "\n");
-                        }
-                        convertStringToInt(minEdit.getText().toString(), maxEdit.getText().toString());
-                        //showMessage("Data", buffer.toString());
-                        Intent intent = new Intent(getActivity(), display.class);
-                        Fragment fragment = new Fragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Key", buffer.toString());
-                        intent.putExtras(bundle);
-                        fragment.setArguments(bundle);
+                    String maxSTR = maxEdit.getText().toString();
+                    int maxInt = Integer.valueOf(maxSTR);
+                    model.setMax(maxInt);
+                }catch (Exception e){
 
-//                        myDB.displayCars();
-                    }//onClick
+                    model.setModel(" ");
+
+                    model.setMin(0);
+
+                    model.setMax(Integer.MAX_VALUE);
                 }
-        );
+
+
+            }
+        });
     }
 
 
@@ -127,7 +98,6 @@ public class buy extends Fragment {
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
->>>>>>> Stashed changes
     }
 
 }

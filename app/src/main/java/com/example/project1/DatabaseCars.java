@@ -12,15 +12,11 @@ public class DatabaseCars extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "car_table";
     public static final String idCol = "ID";
     public static final String modelCar = "ModelCar";
-    //public static final String carSell = "carSell"; //model of car when selling
-   // public static final String carBuy = "carBuy"; //model input of car when searching
     public static final String yearCol = "Year";
     public static final String priceCol = "Price";
 
-    //maybe get rid of max and min since we'll only need one thing for the cash?
-//    public static final int minCol = 0;
-//    public static final int maxCol = 0;
-
+    String carName;
+    int minVal, maxVal;
     public static final int DATABASE_VERSION = 4;
 
     String CREATE_QUERY = "CREATE TABLE " + NewCar.info.TABLE_NAME + "("
@@ -74,6 +70,30 @@ public class DatabaseCars extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor show = db.rawQuery("select * from " +NewCar.info.TABLE_NAME, null);
         return show;
+    }
+
+    public void setModelCar(String model){
+        this.carName = model;
+    }
+
+    public String getModelCar(){
+        return this.carName;
+    }
+
+    public void setMin(Integer min){
+        this.minVal = min;
+    }
+
+    public int getMin(){
+        return this.minVal;
+    }
+
+    public void setMax(Integer max){
+        this.maxVal = max;
+    }
+
+    public int getMax(){
+        return this.maxVal;
     }
 
     public Cursor displayCars(String modelc, int mini, int maxi){
