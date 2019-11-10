@@ -23,7 +23,6 @@ public class display extends Fragment {
     int min, max;
     String modelName;
     SharedViewModel model;
-    TextView modelView, minView, maxView;
 
     public display() {
         // Required empty public constructor
@@ -35,24 +34,15 @@ public class display extends Fragment {
         model.getModel().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String input){
-                //String modelName = model.getModel().toString();
                 modelName = input;
-                //modelView.setText(modelName);
                 myDB.setModelCar(modelName);
-                //tempView.setText(modelName);
-                modelView.setText(myDB.getModelCar());
             }
         });
 
         model.getMin().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer input){
-                //String modelName = model.getModel().toString();
-//                min = input;
-//                String getStr = Integer.toString(min);
-//                tempView.setText(getStr);
                 min = input;
-                minView.setText(Integer.toString(min));
                 myDB.setMin(min);
                 //tempView.setText(Integer.toString(min));
             }
@@ -63,13 +53,26 @@ public class display extends Fragment {
             public void onChanged(Integer input){
                 //String modelName = model.getModel().toString();
                 max = input;
-                maxView.setText(Integer.toString(max));
                 myDB.setMax(max);
                 //tempView.setText(max);
             }
         });
-       // maxView.setText(Integer.toString(min));
-        displayCars();
+
+        model.getEverything().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String every) {
+                String[] everythingArray = every.split(" ");
+                //A[0] is model
+                //A[1] is min
+                //A[2] is max
+                int min = Integer.valueOf(everythingArray[1]);
+                int max = Integer.valueOf(everythingArray[2]);
+                displayCars(everythingArray[0], min, max);
+
+            }
+        });
+
+        //displayCars();
     }
 
     @Override
@@ -78,11 +81,8 @@ public class display extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.fragment_display, container, false);
-        modelView = rootView.findViewById(R.id.modelView);
-        minView = rootView.findViewById(R.id.minView);
-        maxView = rootView.findViewById(R.id.maxView);
         mySQLiteDB(rootView);
-        displayCars();
+        //displayCars();
         return rootView;
 
     }
@@ -92,26 +92,18 @@ public class display extends Fragment {
         carInfo = rootView.findViewById(R.id.carInfo);
     }
 
-    public void displayCars(){
-        //String model = "Nissan";
-        //Cursor show = myDB.displayCars(this.modelName, this.min, this.max);
-        //Cursor show = myDB.displayCars(model, minc, maxc);
-        Cursor show = myDB.displayCars(myDB.getModelCar(), myDB.getMin(), myDB.getMax());
+    public void displayCars(String arr0, int arr1, int arr2){
+        Cursor show = myDB.displayCars(arr0, arr1, arr2);
         if (show.getCount() == 0) {
-            //showMessage("Error", "Nothing found");
-//                            Toast.makeText(getActivity(), "Show Car Error / Empty", Toast.LENGTH_SHORT).show();
             carInfo.setText("There are no cars up for sale.");
         }
         StringBuffer buffer = new StringBuffer();
         while (show.moveToNext()) {
-            //buffer.append("Id : " + show.getString(0) + "\n");
             buffer.append("Model : " + show.getString(1) + "\n");
             buffer.append("Year : " + show.getString(2) + "\n");
-            buffer.append("Price : " + show.getString(3) + "\n");
+            buffer.append("Price : " + show.getString(3) + "\n\n");
         }
-        //showMessage("Data", buffer.toString());
         carInfo.setText(buffer.toString());
-
     }
 
 }

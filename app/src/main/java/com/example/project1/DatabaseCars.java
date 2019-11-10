@@ -98,9 +98,7 @@ public class DatabaseCars extends SQLiteOpenHelper {
 
     public Cursor displayCars(String modelc, int mini, int maxi){
         SQLiteDatabase db = this.getWritableDatabase();
-        //Cursor filterData = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE MAKE = " + make + " AND PRICE BETWEEN " + min + " AND " + max, null);
         Cursor filterData = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE ModelCar = '" + modelc + "' AND PRICE BETWEEN " + mini + " AND " + maxi, null);
-        //Cursor filterData = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE PRICE BETWEEN " + min + " AND " + max, null);
         return filterData;
     }
 }

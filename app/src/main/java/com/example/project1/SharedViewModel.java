@@ -7,12 +7,23 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SharedViewModel extends ViewModel {
-    private MutableLiveData<String> model = new MutableLiveData<>();
+    private MutableLiveData<String> modelCar = new MutableLiveData<>();
     private MutableLiveData<Integer> min = new MutableLiveData<>();
     private MutableLiveData<Integer> max = new MutableLiveData<>();
 
+    private MutableLiveData<String> everything = new MutableLiveData<>();
+
+    public void setEverything(String everything){
+        this.everything.setValue(everything);
+    }
+
+    public LiveData<String> getEverything(){
+        return this.everything;
+    }
+
+
     public void setModel(String carModel) {
-        model.setValue(carModel);
+        modelCar.setValue(carModel);
     }
 
     public void setMin(Integer minInput) {
@@ -24,7 +35,7 @@ public class SharedViewModel extends ViewModel {
     }
 
     public LiveData<String> getModel() {
-        return model;
+        return modelCar;
     }
 
     public LiveData<Integer> getMin() {

@@ -77,6 +77,9 @@ public class buy extends Fragment {
                     String maxSTR = maxEdit.getText().toString();
                     int maxInt = Integer.valueOf(maxSTR);
                     model.setMax(maxInt);
+
+                    model.setEverything(input + " " + minSTR + " " + maxSTR);
+
                 }catch (Exception e){
 
                     model.setModel(" ");
